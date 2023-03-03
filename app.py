@@ -42,4 +42,4 @@ with gr.Blocks(css='style.css') as demo:
             create_demo_superresolution()
         with gr.TabItem(label='Colorization'):
             create_demo_colorization()
-demo.queue(api_open=False).launch()
+demo.queue(max_size=5, api_open=False).launch()
