@@ -17,9 +17,10 @@ DESCRIPTION = '# [DDNM-HQ](https://github.com/wyhuai/DDNM/tree/main/hq_demo)'
 
 if (SPACE_ID := os.getenv('SPACE_ID')) is not None:
     DESCRIPTION += f'\n<p>For faster inference without waiting in queue, you may duplicate the space and upgrade to GPU in settings. <a href="https://huggingface.co/spaces/{SPACE_ID}?duplicate=true"><img style="display: inline; margin-top: 0em; margin-bottom: 0em" src="https://bit.ly/3gLdBN6" alt="Duplicate Space" /></a></p>'
+if not torch.cuda.is_available():
+    DESCRIPTION += '\n<p>Running on CPU 🥶 This demo does not work on CPU.</p>'
 
 if torch.cuda.is_available():
-    DESCRIPTION += '\n<p>Running on GPU 🔥</p>'
     MODEL_DIR = pathlib.Path('DDNM/hq_demo/data/pretrained')
     if not MODEL_DIR.exists():
         MODEL_DIR.mkdir()
@@ -31,8 +32,6 @@ if torch.cuda.is_available():
             'wget https://openaipublic.blob.core.windows.net/diffusion/jul-2021/256x256_diffusion.pt'
         ),
                        cwd=MODEL_DIR.as_posix())
-else:
-    DESCRIPTION += '\n<p>Running on CPU 🥶 This demo does not work on CPU.'
 
 with gr.Blocks(css='style.css') as demo:
     gr.Markdown(DESCRIPTION)
