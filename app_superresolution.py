@@ -15,7 +15,7 @@ def run(image_path: str, class_index: int, scale: str, sigma_y: float) -> str:
         f'python main.py --config confs/inet256.yml --resize_y --deg sr_averagepooling --scale {scale} --class {class_index} --path_y {image_path} --save_path {out_name} --sigma_y {sigma_y}'
     ),
                    cwd='DDNM/hq_demo')
-    return f'DDNM/hq_demo/results/{out_name}/final/00000.png'
+    return f'home/xlab-app-center/DDNM/hq_demo/results/{out_name}/final/00000.png'
 
 
 def create_demo():
